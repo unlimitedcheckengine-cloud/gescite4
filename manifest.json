@@ -1,0 +1,21 @@
+{
+    "name": "CheckEngineRD - Sistema de Citas",
+    "short_name": "GesCita",
+    "description": "Sistema de Gestión de Citas para talleres.",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#f8f9fa",
+    "theme_color": "#2c3e50",
+    "icons": [
+        {
+            "src": "https://via.placeholder.com/192/2c3e50/FFFFFF?text=C",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "https://via.placeholder.com/512/2c3e50/FFFFFF?text=C",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

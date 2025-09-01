@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckEngineRD Unlimited - Sistema de Citas</title>
+    <!-- Importación de Bootstrap CSS y Font Awesome para íconos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts para una tipografía más moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-brand-wrapper">
+            <button class="btn-icon" id="sidebarToggle" title="Toggle Sidebar"><i class="fas fa-bars"></i></button>
+            <a class="navbar-brand" href="#">
+                <img id="headerLogo" src="https://placehold.co/180x50/ffffff/3498db?text=CheckEngineRD" alt="Checkenginerd Unlimited" class="logo">
+                <h1 class="header-title" id="headerEmpresaNombre">CheckEngineRD Unlimited</h1>
+            </a>
+        </div>
+        <div class="header-actions">
+            <div class="welcome-user d-none d-md-flex align-items-center">
+                <i class="fas fa-user-circle me-2"></i>
+                <span id="welcomeUserText">¡Hola, bienvenido!</span>
+            </div>
+            <button class="btn-icon" data-bs-toggle="modal" data-bs-target="#configuracionModal" title="Configuración">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </header>
+<div class="app-body">
+    <nav class="app-sidebar">
+        <ul class="nav flex-column sidebar-nav" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-inicio-tab" data-bs-toggle="pill" data-bs-target="#pills-inicio" type="button" role="tab" aria-controls="pills-inicio" aria-selected="true">
+                    <i class="fas fa-tachometer-alt fa-fw"></i> <span class="text">Inicio</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-citas-tab" data-bs-toggle="pill" data-bs-target="#pills-citas" type="button" role="tab" aria-controls="pills-citas" aria-selected="false">
+                    <i class="fas fa-list fa-fw"></i> <span class="text">Gestionar Citas</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-nueva-tab" data-bs-toggle="pill" data-bs-target="#pills-nueva" type="button" role="tab" aria-controls="pills-nueva" aria-selected="false">
+                    <i class="fas fa-plus-circle fa-fw"></i> <span class="text">Nueva Cita</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-calendario-tab" data-bs-toggle="pill" data-bs-target="#pills-calendario" type="button" role="tab" aria-controls="pills-calendario" aria-selected="false">
+                    <i class="fas fa-calendar-alt fa-fw"></i> <span class="text">Calendario</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-clientes-tab" data-bs-toggle="pill" data-bs-target="#pills-clientes" type="button" role="tab" aria-controls="pills-clientes" aria-selected="false">
+                    <i class="fas fa-id-card fa-fw"></i> <span class="text">Clientes</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-reportes-tab" data-bs-toggle="pill" data-bs-target="#pills-reportes" type="button" role="tab" aria-controls="pills-reportes" aria-selected="false">
+                    <i class="fas fa-chart-bar fa-fw"></i> <span class="text">Reportes</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-seguimiento-tab" data-bs-toggle="pill" data-bs-target="#pills-seguimiento" type="button" role="tab" aria-controls="pills-seguimiento" aria-selected="false">
+                    <i class="fas fa-headset fa-fw"></i> <span class="text">Seguimiento</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-postventa-tab" data-bs-toggle="pill" data-bs-target="#pills-postventa" type="button" role="tab" aria-controls="pills-postventa" aria-selected="false">
+                    <i class="fas fa-star-half-alt fa-fw"></i> <span class="text">Post-Venta</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-trabajos-tab" data-bs-toggle="pill" data-bs-target="#pills-trabajos" type="button" role="tab" aria-controls="pills-trabajos" aria-selected="false">
+                    <i class="fas fa-tools fa-fw"></i> <span class="text">Trabajos</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-almacen-tab" data-bs-toggle="pill" data-bs-target="#pills-almacen" type="button" role="tab" aria-controls="pills-almacen" aria-selected="false">
+                    <i class="fas fa-warehouse fa-fw"></i> <span class="text">Almacén</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="extras.html">
+                    <i class="fas fa-star fa-fw"></i><span class="text">Extras</span>
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-ayuda-tab" data-bs-toggle="pill" data-bs-target="#pills-ayuda" type="button" role="tab" aria-controls="pills-ayuda" aria-selected="false">
+                    <i class="fas fa-question-circle fa-fw"></i> <span class="text">Ayuda</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+    <main class="main-content-wrapper">
+        <!-- Mensaje de confirmación o error -->
+        <div id="mensajeContainer" class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1090; display: none;">
+            <div id="mensajeAlerta" class="alert fade show" role="alert"></div>
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div class="tab-content" id="pills-tabContent">
+            <!-- Pestaña de Inicio (Dashboard) -->
+            <div class="tab-pane fade show active" id="pills-inicio" role="tabpanel" aria-labelledby="pills-inicio-tab">
+                <!-- Hero Banner del Dashboard -->
+                <div class="welcome-banner">
+                    <h2>¡Hola, bienvenido de nuevo!</h2>
+                    <p>Este es tu centro de control. Revisa tus próximas citas, gestiona clientes y mantén tu negocio al día.</p>
+                    <button class="btn btn-light" id="btnDashboardNuevaCita"><i class="fas fa-plus-circle me-2"></i>Agendar una nueva cita</button>
+                </div>
+
+                <!-- Panel de resumen -->
+                <div class="dashboard-card">
+                    <div class="card-header card-header-custom">
+                        <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Resumen General</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="summary-widget">
+                                    <div class="widget-icon bg-primary-soft">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="summary-value" id="resumenTotal">0</div>
+                                        <div class="summary-label">Total Citas</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="summary-widget">
+                                    <div class="widget-icon bg-info-soft">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="summary-value" id="resumenHoy">0</div>
+                                        <div class="summary-label">Citas Hoy</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="summary-widget">
+                                    <div class="widget-icon bg-warning-soft">
+                                        <i class="fas fa-hourglass-start"></i>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="summary-value" id="resumenPendientes">0</div>
+                                        <div class="summary-label">Pendientes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="summary-widget">
+                                    <div class="widget-icon bg-success-soft">
+                                        <i class="fas fa-file-invoice-dollar"></i>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div class="summary-value" id="resumenFacturado">$0</div>
+                                        <div class="summary-label">Facturado</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Próximas Citas -->
+                        <div class="card dashboard-card mb-4">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0"><i class="fas fa-hourglass-half me-2"></i>Próximas Citas Pendientes</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" id="proximasCitasContainer">
+                                    <!-- Las próximas citas se cargarán aquí -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Actividad Reciente -->
+                        <div class="card dashboard-card mb-4">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0"><i class="fas fa-history me-2"></i>Actividad Reciente</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" id="actividadRecienteContainer">
+                                    <!-- La actividad reciente se cargará aquí -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Acciones Rápidas -->
+                        <div class="card dashboard-card">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Acciones Rápidas</h5>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-primary-custom w-100 mb-2" onclick="document.getElementById('pills-nueva-tab').click()"><i class="fas fa-plus-circle me-2"></i>Nueva Cita</button>
+                                <button class="btn btn-secondary-custom w-100" onclick="document.getElementById('pills-calendario-tab').click()"><i class="fas fa-calendar-alt me-2"></i>Ver Calendario</button>
+                            </div>
+                        </div>
+                        <!-- Ejemplo de Isla de Contenido -->
+                        <div class="content-island mt-4">
+                            <h5><i class="fas fa-info-circle me-2 text-info"></i>Tip del Día</h5>
+                            <p class="text-muted mb-0">Puedes hacer clic en cualquier cita en la vista de calendario para editarla directamente. ¡Ahorra tiempo!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Gestión de Citas -->
+            <div class="tab-pane fade" id="pills-citas" role="tabpanel" aria-labelledby="pills-citas-tab">
+                <div class="content-island mb-4">
+                    <h4 class="mb-1"><i class="fas fa-list me-2"></i>Gestión de Citas</h4>
+                    <p class="text-muted mb-0">Visualiza, filtra y administra todas las citas de tus clientes desde un solo lugar.</p>
+                </div>
+
+                <!-- Ejemplo de Alerta -->
+                <div class="alert-custom alert-info alert-outline mb-4">
+                    <i class="fas fa-info-circle alert-icon"></i>
+                    <div>
+                        <strong>Recordatorio:</strong> Las citas pasadas con estado "pendiente" se mueven automáticamente a "No Asistió" al iniciar el sistema.
+                    </div>
+                </div>
+
+                <!-- Panel de Estadísticas -->
+                <div class="row text-center mb-4" id="estadisticasDiarias">
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Total de Citas</h6>
+                                <p class="stat-value text-primary" id="statsTotal">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Recibidas</h6>
+                                <p class="stat-value text-info" id="statsRecibidas">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Monto Facturado</h6>
+                                <p class="stat-value text-success" id="statsMonto">$0.00 RD</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">Efectividad</h6>
+                                <p class="stat-value text-dark" id="statsEfectividad">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de Filtros y Búsqueda -->
+                <div class="card dashboard-card mb-4">
+                    <div class="card-header card-header-custom">
+                        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filtros y Búsqueda</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-lg-4 col-md-12 mb-2 mb-lg-0">
+                                <label for="filtroBusqueda" class="form-label">Buscar por texto:</label>
+                                <input type="text" class="form-control" id="filtroBusqueda" placeholder="Nombre, teléfono, vehículo...">
+                            </div>
+                            <div class="col-lg-2 col-md-3 mb-2 mb-md-0">
+                                <label for="filtroFecha" class="form-label">Por Día:</label>
+                                <input type="date" class="form-control" id="filtroFecha">
+                            </div>
+                            <div class="col-lg-2 col-md-3 mb-2 mb-md-0">
+                                <label for="filtroMes" class="form-label">Por Mes:</label>
+                                <select class="form-select" id="filtroMes">
+                                    <option value="">Todos los meses</option>
+                                    <option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option><option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option><option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-3 mb-2 mb-md-0">
+                                <label for="filtroAnio" class="form-label">Por Año:</label>
+                                <select class="form-select" id="filtroAnio">
+                                    <option value="">Todos los años</option>
+                                    <!-- Los años se cargarán dinámicamente -->
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-3">
+                                <div class="form-check form-switch mt-md-4">
+                                    <input class="form-check-input" type="checkbox" id="filtroFacturado">
+                                    <label class="form-check-label" for="filtroFacturado">Solo facturados</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="grupo-filtros" class="btn-group btn-group-sm" role="group" aria-label="Filtros por estado de cita">
+                            <button type="button" class="btn btn-outline-primary active" data-estado="todas">Todas</button>
+                            <button type="button" class="btn btn-outline-secondary" data-estado="pendiente">Pendientes</button>
+                            <button type="button" class="btn btn-outline-info" data-estado="recibido">Recibidos</button>
+                            <button type="button" class="btn btn-outline-success" data-estado="completada">Completadas</button>
+                            <button type="button" class="btn btn-outline-warning" data-estado="reagendada">Reagendadas</button>
+                            <button type="button" class="btn btn-outline-danger" data-estado="no_asistio">No Asistieron</button>
+                            <button type="button" class="btn btn-outline-dark" data-estado="cancelada">Canceladas</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta para citas programadas y tabla -->
+                <div class="card dashboard-card mb-4 position-relative">
+                    <div class="card-header card-header-custom d-flex flex-wrap justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Citas Programadas</h5>
+                        <button id="btnCopiarLista" class="btn btn-sm btn-light" title="Copiar lista de citas">
+                            <i class="fas fa-copy me-1"></i>Copiar Lista
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Fecha/Hora</th>
+                                        <th>Cliente</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Año</th>
+                                        <th>Región</th>
+                                        <th>Agente</th>
+                                        <th>Estado</th>
+                                        <th>Finanzas</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listaCitas">
+                                    <!-- Las citas se cargarán aquí dinámicamente con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Nueva Cita -->
+            <div class="tab-pane fade" id="pills-nueva" role="tabpanel" aria-labelledby="pills-nueva-tab">
+                <div class="content-island mb-4">
+                    <h4 class="mb-1">Crear Nueva Cita</h4>
+                    <p class="text-muted mb-0">Completa los siguientes pasos para agendar un nuevo servicio para un cliente.</p>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <form id="citaForm">
+                            <!-- Panel 1: Datos del Cliente -->
+                            <div class="card dashboard-card mb-4">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><span class="badge bg-primary rounded-pill me-3">1</span> Datos del Cliente</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="telefono" class="form-label">Teléfono*</label>
+                                            <input type="tel" class="form-control" id="telefono" required placeholder="Escriba y presione Tab...">
+                                            <div class="form-text">Al buscar por teléfono, se autocompletarán los datos si el cliente ya existe.</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombreCliente" class="form-label">Nombre*</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="nombreCliente" required>
+                                                <span class="input-group-text" id="clienteExistenteIcon" style="display: none;" title="Cliente existente">
+                                                    <i class="fas fa-check-circle text-success"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel 2: Datos del Vehículo -->
+                            <div class="card dashboard-card mb-4">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><span class="badge bg-primary rounded-pill me-3">2</span> Datos del Vehículo</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="vehiculoExistenteContainer" class="mb-3" style="display: none;">
+                                        <label for="vehiculoExistenteSelect" class="form-label">Seleccionar Vehículo Existente</label>
+                                        <select class="form-select" id="vehiculoExistenteSelect"></select>
+                                    </div>
+                                    <div id="nuevoVehiculoSection">
+                                        <hr id="vehiculoDivider" style="display: none;">
+                                        <h6 class="text-muted mb-3" id="nuevoVehiculoTitle">Introducir datos del vehículo</h6>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3"><label for="marca" class="form-label">Marca*</label><input type="text" class="form-control" id="marca" required></div>
+                                            <div class="col-md-4 mb-3"><label for="modelo" class="form-label">Modelo*</label><input type="text" class="form-control" id="modelo" required></div>
+                                            <div class="col-md-4 mb-3"><label for="anio" class="form-label">Año*</label><input type="number" class="form-control" id="anio" min="1900" max="2099" required></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="region" class="form-label">Región</label>
+                                                <select class="form-select" id="region">
+                                                    <option value="">Seleccione...</option>
+                                                    <option value="Americano">Americano</option>
+                                                    <option value="Europeo">Europeo</option>
+                                                    <option value="Japonés">Japonés</option>
+                                                    <option value="Coreano">Coreano</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="combustible" class="form-label">Combustible</label>
+                                                <select class="form-select" id="combustible">
+                                                    <option value="">Seleccione...</option>
+                                                    <option value="Gasolina">Gasolina</option>
+                                                    <option value="Diesel">Diesel</option>
+                                                    <option value="Eléctrico">Eléctrico</option>
+                                                    <option value="Híbrido">Híbrido</option>
+                                                    <option value="Gas (GLP/GNV)">Gas (GLP/GNV)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="trim" class="form-label">Trim/Versión</label>
+                                                <input type="text" class="form-control" id="trim" placeholder="Ej: EX, Sport, Limited">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel 3: Detalles de la Cita -->
+                            <div class="card dashboard-card mb-4">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><span class="badge bg-primary rounded-pill me-3">3</span> Detalles del Servicio y Cita</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="fecha" class="form-label">Fecha*</label>
+                                            <input type="date" class="form-control" id="fecha" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="hora" class="form-label">Hora*</label>
+                                            <select class="form-select" id="hora" required>
+                                                <option value="08:00">8:00 AM</option><option value="09:00">9:00 AM</option><option value="10:00">10:00 AM</option><option value="11:00">11:00 AM</option>
+                                                <option value="12:00">12:00 PM</option><option value="13:00">1:00 PM</option><option value="14:00">2:00 PM</option><option value="15:00">3:00 PM</option><option value="16:00">4:00 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="servicio" class="form-label">Tipo de Servicio*</label>
+                                        <div class="input-group">
+                                            <select class="form-select" id="servicio" required>
+                                                <option value="">Seleccione un servicio...</option>
+                                                <!-- Servicios predefinidos se cargarán aquí -->
+                                            </select>
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#gestionServiciosModal" title="Gestionar Servicios"><i class="fas fa-cog"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3" id="otroServicioContainer" style="display: none;">
+                                        <label for="otroServicio" class="form-label">Especificar Servicio</label><input type="text" class="form-control" id="otroServicio">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="agente" class="form-label">Agente de Ventas</label>
+                                        <div class="input-group">
+                                            <select class="form-select" id="agente" required>
+                                                <option value="">Seleccione un agente...</option>
+                                            </select>
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#gestionAgentesModal"><i class="fas fa-cog"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fuente" class="form-label">Fuente de la Cita</label>
+                                        <div class="input-group">
+                                            <select class="form-select" id="fuente" required>
+                                                <option value="">Seleccione una fuente...</option>
+                                                <!-- Fuentes se cargarán aquí -->
+                                            </select>
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#gestionFuentesModal" title="Gestionar Fuentes"><i class="fas fa-cog"></i></button>
+                                        </div>
+                                        <div id="otroFuenteContainer" class="mt-2" style="display: none;">
+                                            <input type="text" class="form-control" id="otroFuente" placeholder="Especifique la nueva fuente...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel 4: Notas y Promoción -->
+                            <div class="card dashboard-card mb-4">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><span class="badge bg-primary rounded-pill me-3">4</span> Notas y Promoción (Opcional)</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="notas" class="form-label">Notas Adicionales</label>
+                                        <textarea class="form-control" id="notas" rows="3" placeholder="Describa cualquier problema o detalle adicional..."></textarea>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="esPromocion">
+                                            <label class="form-check-label" for="esPromocion">Activar Promoción</label>
+                                        </div>
+                                    </div>
+                                    <div id="promoContainer" class="row" style="display: none;">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="precioRegular" class="form-label">Precio Regular</label>
+                                            <div class="input-group"><span class="input-group-text currency-symbol">$</span><input type="number" class="form-control" id="precioRegular" placeholder="Ej: 1500"></div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="precioPromocional" class="form-label">Precio Promocional</label>
+                                            <div class="input-group"><span class="input-group-text currency-symbol">$</span><input type="number" class="form-control" id="precioPromocional" placeholder="Ej: 995"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary-custom w-100 py-2 fs-5">
+                                <i class="fas fa-calendar-check me-2"></i>Programar Cita
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Reportes -->
+            <div class="tab-pane fade" id="pills-reportes" role="tabpanel" aria-labelledby="pills-reportes-tab">
+                <!-- Banner de Introducción -->
+                <div class="ui-banner banner-primary mb-4" id="reportes-banner">
+                    <i class="fas fa-chart-line banner-icon"></i>
+                    <div>
+                        <h4>Centro de Reportes</h4>
+                        <p>Analiza el rendimiento de tu negocio con estos reportes interactivos. Usa los filtros para acotar los datos y exporta tus resultados.</p>
+                    </div>
+                </div>
+
+                <!-- Sección de Filtros para Reportes -->
+                <div class="card dashboard-card mb-4">
+                    <div class="card-header card-header-custom">
+                        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filtros para Reportes</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-end">
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label for="filtroReporteFechaInicio" class="form-label">Fecha Inicio:</label>
+                                <input type="date" class="form-control" id="filtroReporteFechaInicio">
+                            </div>
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label for="filtroReporteFechaFin" class="form-label">Fecha Fin:</label>
+                                <input type="date" class="form-control" id="filtroReporteFechaFin">
+                            </div>
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label for="filtroReporteAgente" class="form-label">Agente:</label>
+                                <select class="form-select" id="filtroReporteAgente">
+                                    <option value="">Todos los agentes</option>
+                                    <!-- Agentes se cargarán dinámicamente -->
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label for="filtroReporteServicio" class="form-label">Servicio:</label>
+                                <select class="form-select" id="filtroReporteServicio">
+                                    <option value="">Todos los servicios</option>
+                                    <!-- Servicios se cargarán dinámicamente -->
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label for="filtroReporteRegion" class="form-label">Región:</label>
+                                <select class="form-select" id="filtroReporteRegion">
+                                    <option value="">Todas</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label for="filtroReporteCombustible" class="form-label">Combustible:</label>
+                                <select class="form-select" id="filtroReporteCombustible">
+                                    <option value="">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <div id="grupo-filtros-reportes" class="btn-group btn-group-sm me-3 mb-2" role="group" aria-label="Filtros por estado de cita en reportes">
+                                <button type="button" class="btn btn-outline-primary active" data-estado="todas">Todas</button>
+                                <button type="button" class="btn btn-outline-secondary" data-estado="pendiente">Pendientes</button>
+                                <button type="button" class="btn btn-outline-info" data-estado="recibido">Recibidos</button>
+                                <button type="button" class="btn btn-outline-success" data-estado="completada">Completadas</button>
+                                <button type="button" class="btn btn-outline-warning" data-estado="reagendada">Reagendadas</button>
+                                <button type="button" class="btn btn-outline-danger" data-estado="no_asistio">No Asistieron</button>
+                                <button type="button" class="btn btn-outline-dark" data-estado="cancelada">Canceladas</button>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="filtroReporteFacturado"><label class="form-check-label" for="filtroReporteFacturado">Solo facturados</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido de Reportes (Gráficos y Tablas) -->
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card dashboard-card h-100">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Resumen por Estado</h5>
+                            </div>
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <canvas id="estadoChart" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card dashboard-card h-100">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Facturación Mensual</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="facturacionChart" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card dashboard-card h-100">
+                            <div class="card-header card-header-custom"><h5 class="mb-0"><i class="fas fa-globe-americas me-2"></i>Origen de Vehículos</h5></div>
+                            <div class="card-body d-flex align-items-center justify-content-center"><canvas id="origenVehiculoChart" style="max-height: 300px;"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card dashboard-card h-100">
+                            <div class="card-header card-header-custom"><h5 class="mb-0"><i class="fas fa-share-alt me-2"></i>Fuente de Citas</h5></div>
+                            <div class="card-body d-flex align-items-center justify-content-center"><canvas id="fuenteCitasChart" style="max-height: 300px;"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card dashboard-card h-100">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Servicios Más Solicitados</h5>
+                            </div>
+                            <div class="card-body"><canvas id="serviciosPopularesChart" style="max-height: 300px;"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reportes Detallados en Pestañas -->
+                <div class="card dashboard-card">
+                    <div class="card-header card-header-custom">
+                        <ul class="nav nav-tabs card-header-tabs" id="reportes-detallados-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="reporte-mecanicos-tab" data-bs-toggle="tab" data-bs-target="#reporte-mecanicos" type="button" role="tab">
+                                    <i class="fas fa-user-cog me-1"></i> Productividad (Mecánicos)
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reporte-agentes-tab" data-bs-toggle="tab" data-bs-target="#reporte-agentes" type="button" role="tab">
+                                    <i class="fas fa-user-tie me-1"></i> Productividad (Agentes)
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reporte-servicios-tab" data-bs-toggle="tab" data-bs-target="#reporte-servicios" type="button" role="tab">
+                                    <i class="fas fa-wrench me-1"></i> Detalle por Servicio
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="reportes-detallados-content">
+                            <div class="tab-pane fade show active" id="reporte-mecanicos" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm">
+                                        <thead><tr><th>Mecánico</th><th class="text-center">Chequeos</th><th class="text-center">Otros Trabajos</th><th class="text-end">Total Facturado</th><th class="text-end">Promedio</th></tr></thead>
+                                        <tbody id="tablaReportesMecanicos"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reporte-agentes" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm">
+                                        <thead><tr><th>Agente</th><th>Citas Programadas</th><th>Citas Completadas</th><th>Recibidos</th><th>No Asistió</th><th>Canceladas</th><th>Monto Facturado</th><th>Monto Promedio</th><th>Efectividad</th><th>Vehículo Top</th></tr></thead>
+                                        <tbody id="tablaReportes"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reporte-servicios" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm">
+                                        <thead><tr><th>Servicio</th><th>Cantidad</th><th>Total Facturado</th><th>Monto Promedio</th></tr></thead>
+                                        <tbody id="tablaReportesServicios"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Calendario -->
+            <div class="tab-pane fade" id="pills-calendario" role="tabpanel" aria-labelledby="pills-calendario-tab">
+                <div class="card dashboard-card">
+                    <div class="card-header card-header-custom">
+                        <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Calendario de Citas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="calendario"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Clientes -->
+            <div class="tab-pane fade" id="pills-clientes" role="tabpanel" aria-labelledby="pills-clientes-tab">
+                <div class="row client-view">
+                    <!-- Columna de Lista de Clientes -->
+                    <div class="col-lg-4">
+                        <div class="card dashboard-card">
+                            <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="fas fa-users me-2"></i>Lista de Clientes</h5>
+                                <button class="btn btn-sm btn-light" id="btnNuevoCliente">
+                                    <i class="fas fa-plus me-1"></i>Nuevo
+                                </button>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="p-3">
+                                    <input type="text" id="filtroClientes" class="form-control" placeholder="Buscar cliente...">
+                                </div>
+                                <div class="list-group list-group-flush" id="listaClientes" style="max-height: 70vh; overflow-y: auto;">
+                                    <!-- Clientes se cargarán aquí -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Columna de Detalles del Cliente -->
+                    <div class="col-lg-8">
+                        <div id="historialClienteContainer" class="dashboard-card" style="display: none;">
+                            <!-- Cabecera del Perfil del Cliente -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="mb-0"><i class="fas fa-user-circle me-2 text-primary"></i><span id="nombreClienteHistorial"></span></h3>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-secondary" id="btnEditarCliente"><i class="fas fa-edit me-1"></i> Editar Cliente</button>
+                                    <button class="btn btn-sm btn-success" id="btnAbrirModalWhatsapp">
+                                        <i class="fab fa-whatsapp me-1"></i> Enviar Mensaje
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-4"><strong>Teléfono:</strong> <span id="telefonoClienteHistorial"></span> | <strong>Email:</strong> <span id="emailClienteHistorial"></span></p>
+                            
+                            <!-- Widgets de Resumen -->
+                            <div class="row mb-4 g-3">
+                                <div class="col-md-4">
+                                    <div class="summary-widget">
+                                        <div class="widget-icon bg-primary-soft">
+                                            <i class="fas fa-list-ol"></i>
+                                        </div>
+                                        <div class="widget-content">
+                                            <div class="summary-value fs-4" id="clienteTotalCitas">0</div>
+                                            <div class="summary-label">Total Citas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="summary-widget">
+                                        <div class="widget-icon bg-success-soft">
+                                            <i class="fas fa-wallet"></i>
+                                        </div>
+                                        <div class="widget-content">
+                                            <div class="summary-value fs-4" id="clienteTotalFacturado">$0</div>
+                                            <div class="summary-label">Total Facturado</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="summary-widget">
+                                        <div class="widget-icon bg-info-soft">
+                                            <i class="fas fa-user-clock"></i>
+                                        </div>
+                                        <div class="widget-content">
+                                            <div class="summary-value fs-4" id="clienteUltimaVisita">N/A</div>
+                                            <div class="summary-label">Última Visita</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pestañas de Información -->
+                            <ul class="nav nav-tabs" id="cliente-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="historial-tab" data-bs-toggle="tab" data-bs-target="#historial-pane" type="button" role="tab"><i class="fas fa-history me-1"></i> Historial de Citas</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="vehiculos-tab" data-bs-toggle="tab" data-bs-target="#vehiculos-pane" type="button" role="tab"><i class="fas fa-car me-1"></i> Vehículos</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="notas-cliente-tab" data-bs-toggle="tab" data-bs-target="#notas-cliente-pane" type="button" role="tab"><i class="fas fa-sticky-note me-1"></i> Notas</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="mecanicos-cliente-tab" data-bs-toggle="tab" data-bs-target="#mecanicos-cliente-pane" type="button" role="tab"><i class="fas fa-user-cog me-1"></i> Mecánicos</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3 border border-top-0" id="cliente-tabContent">
+                                <!-- Panel de Historial de Citas -->
+                                <div class="tab-pane fade show active" id="historial-pane" role="tabpanel">
+                                    <div id="tablaHistorialCliente" class="table-responsive" style="max-height: 400px;">
+                                        <!-- Historial se cargará aquí -->
+                                    </div>
+                                </div>
+                                <!-- Panel de Vehículos -->
+                                <div class="tab-pane fade" id="vehiculos-pane" role="tabpanel">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h5 class="mb-0">Vehículos Registrados</h5>
+                                        <button class="btn btn-sm btn-primary" id="btnNuevoVehiculo"><i class="fas fa-plus me-1"></i> Añadir Vehículo</button>
+                                    </div>
+                                    <div id="listaVehiculosCliente">
+                                        <!-- Vehículos del cliente se cargarán aquí -->
+                                    </div>
+                                </div>
+                                <!-- Panel de Notas -->
+                                <div class="tab-pane fade" id="notas-cliente-pane" role="tabpanel">
+                                    <h5 class="mb-2">Notas sobre el Cliente</h5>
+                                    <textarea id="notasClienteText" class="form-control" rows="8" placeholder="Añadir notas internas sobre el cliente..."></textarea>
+                                    <button class="btn btn-primary mt-2" id="btnGuardarNotasCliente"><i class="fas fa-save me-1"></i> Guardar Notas</button>
+                                </div>
+                                <!-- Panel de Mecánicos -->
+                                <div class="tab-pane fade" id="mecanicos-cliente-pane" role="tabpanel">
+                                    <h5 class="mb-3">Mecánicos que han trabajado con este cliente</h5>
+                                    <div id="listaMecanicosCliente">
+                                        <!-- La lista de mecánicos se cargará aquí -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="placeholderCliente" class="placeholder-view" style="display: none;">
+                            <i class="fas fa-id-card fa-4x text-muted"></i>
+                            <p class="mt-3 text-muted">Seleccione un cliente de la lista para ver sus detalles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Seguimiento -->
+            <div class="tab-pane fade" id="pills-seguimiento" role="tabpanel" aria-labelledby="pills-seguimiento-tab">
+                <!-- Banner de Introducción y Filtros -->
+                <div class="content-island mb-4" id="seguimiento-intro">
+                    <h5 class="mb-0"><i class="fas fa-headset me-2"></i>Seguimiento de Clientes</h5>
+                    <p class="text-muted mt-2">Aquí se listan clientes que no asistieron, cancelaron, o que fueron recibidos pero no completaron su servicio después de 3 días.</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="filtroSeguimientoAgente" class="form-label">Filtrar por Agente:</label>
+                            <select class="form-select form-select-sm" id="filtroSeguimientoAgente">
+                                <option value="">Todos los Agentes</option>
+                                <!-- Agentes se cargarán aquí -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widgets de Resumen -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <div class="card text-white bg-warning h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Por Contactar</h5>
+                                <p class="card-text fs-3 fw-bold" id="seguimientoPorContactar">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-success h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Contactados (90 días)</h5>
+                                <p class="card-text fs-3 fw-bold" id="seguimientoContactados">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla Unificada de Seguimiento -->
+                <div class="card dashboard-card">
+                    <div class="card-header card-header-custom d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="btn-group btn-group-sm" id="filtrosSeguimientoEstado" role="group">
+                            <button type="button" class="btn btn-outline-primary active" data-filtro="pending">Por Contactar</button>
+                            <button type="button" class="btn btn-outline-primary" data-filtro="contacted">Contactados</button>
+                        </div>
+                        <div class="d-flex align-items-center mt-2 mt-md-0" id="filtrosSeguimientoFechaContainer">
+                            <label for="filtroSeguimientoInicio" class="form-label me-2 mb-0 small">Desde:</label>
+                            <input type="date" id="filtroSeguimientoInicio" class="form-control form-control-sm me-3" style="width: auto;">
+                            <label for="filtroSeguimientoFin" class="form-label me-2 mb-0 small">Hasta:</label>
+                            <input type="date" id="filtroSeguimientoFin" class="form-control form-control-sm" style="width: auto;">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead id="theadSeguimiento"></thead>
+                                <tbody id="listaSeguimientoUnificada"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Post-Venta -->
+            <div class="tab-pane fade" id="pills-postventa" role="tabpanel" aria-labelledby="pills-postventa-tab">
+                <!-- Banner de Introducción y Filtros -->
+                <div class="content-island mb-4" id="postventa-intro">
+                    <h5 class="mb-0"><i class="fas fa-star-half-alt me-2"></i>Seguimiento Post-Venta</h5>
+                    <p class="text-muted mt-2">Aquí se listan clientes con servicios completados hace 3 días o más para realizar un seguimiento de satisfacción.</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="filtroPostVentaAgente" class="form-label">Filtrar por Agente:</label>
+                            <select class="form-select form-select-sm" id="filtroPostVentaAgente">
+                                <option value="">Todos los Agentes</option>
+                                <!-- Agentes se cargarán aquí -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widgets de Resumen -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <div class="card text-white bg-info h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Por Contactar</h5>
+                                <p class="card-text fs-3 fw-bold" id="postVentaPorContactar">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-primary h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Contactados (90 días)</h5>
+                                <p class="card-text fs-3 fw-bold" id="postVentaContactados">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla Unificada de Post-Venta -->
+                <div class="card dashboard-card">
+                    <div class="card-header card-header-custom d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="btn-group btn-group-sm" id="filtrosPostVentaEstado" role="group">
+                            <button type="button" class="btn btn-outline-primary active" data-filtro="pending">Por Contactar</button>
+                            <button type="button" class="btn btn-outline-primary" data-filtro="contacted">Contactados</button>
+                        </div>
+                        <div class="d-flex align-items-center mt-2 mt-md-0" id="filtrosPostVentaFechaContainer">
+                            <label for="filtroPostVentaInicio" class="form-label me-2 mb-0 small">Desde:</label>
+                            <input type="date" id="filtroPostVentaInicio" class="form-control form-control-sm me-3" style="width: auto;">
+                            <label for="filtroPostVentaFin" class="form-label me-2 mb-0 small">Hasta:</label>
+                            <input type="date" id="filtroPostVentaFin" class="form-control form-control-sm" style="width: auto;">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead id="theadPostVenta"></thead>
+                                <tbody id="listaPostVentaUnificada"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Gestión de Trabajos -->
+            <div class="tab-pane fade" id="pills-trabajos" role="tabpanel" aria-labelledby="pills-trabajos-tab">
+                <div class="card dashboard-card">
+                    <div class="card-header card-header-custom">
+                        <h5 class="mb-0"><i class="fas fa-check-double me-2"></i>Trabajos Completados</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Aquí se listan todas las citas con estado "Completada". Puedes asignar los mecánicos que trabajaron en cada caso.</p>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Cliente / Vehículo</th>
+                                        <th>Servicio</th>
+                                        <th>Mec. Chequeo</th>
+                                        <th>Mec. Trabajo</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listaTrabajos">
+                                    <!-- Los trabajos completados se cargarán aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Almacén / Inventario -->
+            <div class="tab-pane fade" id="pills-almacen" role="tabpanel" aria-labelledby="pills-almacen-tab">
+                <div class="content-island mb-4">
+                    <h4 class="mb-1"><i class="fas fa-warehouse me-2"></i>Gestión de Almacén</h4>
+                    <p class="text-muted mb-0">Administra tus productos, controla el stock y registra todas las entradas y salidas.</p>
+                </div>
+
+                <div class="card dashboard-card">
+                    <div class="card-header card-header-custom d-flex flex-wrap justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-boxes me-2"></i>Lista de Productos</h5>
+                        <div>
+                            <input type="text" id="filtroProductos" class="form-control form-control-sm d-inline-block me-2" style="width: auto;" placeholder="Buscar producto...">
+                            <button class="btn btn-sm btn-primary" id="btnNuevoProducto">
+                                <i class="fas fa-plus me-1"></i>Añadir Producto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>SKU</th>
+                                        <th class="text-center">Stock Actual</th>
+                                        <th class="text-end">Precio Costo</th>
+                                        <th class="text-end">Precio Venta</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaInventario">
+                                    <!-- Los productos del inventario se cargarán aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Ayuda -->
+            <div class="tab-pane fade" id="pills-ayuda" role="tabpanel" aria-labelledby="pills-ayuda-tab">
+                <div class="content-island mb-4">
+                    <h4 class="mb-1"><i class="fas fa-question-circle me-2"></i>Guía Rápida del Sistema</h4>
+                    <p class="text-muted mb-0">Encuentra respuestas a las preguntas más comunes sobre cómo usar Gescita.</p>
+                </div>
+
+                <div class="accordion" id="accordionAyuda">
+                    <!-- Item 1: Dashboard -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <strong><i class="fas fa-tachometer-alt fa-fw me-2"></i>Pestaña de Inicio (Dashboard)</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionAyuda">
+                            <div class="accordion-body">
+                                <p>El <strong>Dashboard</strong> es tu centro de control principal. Aquí puedes ver un resumen rápido de la actividad de tu negocio.</p>
+                                <ul>
+                                    <li><strong>Resumen General:</strong> Tarjetas que muestran el total de citas, las citas de hoy, las pendientes y el monto total facturado.</li>
+                                    <li><strong>Próximas Citas:</strong> Una lista de las próximas 5 citas que aún están pendientes.</li>
+                                    <li><strong>Actividad Reciente:</strong> Muestra las últimas 5 acciones realizadas en el sistema, como la creación o actualización de citas.</li>
+                                    <li><strong>Acciones Rápidas:</strong> Botones para crear una nueva cita o ir al calendario directamente.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Gestionar Citas -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <strong><i class="fas fa-list fa-fw me-2"></i>Gestionar Citas</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionAyuda">
+                            <div class="accordion-body">
+                                <p>Esta sección es donde pasas la mayor parte del tiempo. Te permite ver y administrar todas las citas.</p>
+                                <ul>
+                                    <li><strong>Filtros:</strong> Puedes buscar por texto (nombre, teléfono, etc.), por día, mes y año. También puedes filtrar por estado (Pendiente, Completada, etc.) y si la cita ha sido facturada.</li>
+                                    <li><strong>Estadísticas:</strong> Los cuadros de arriba muestran un resumen de las citas que coinciden con tus filtros actuales.</li>
+                                    <li><strong>Acciones de Cita:</strong> En la tabla, cada cita tiene botones para:
+                                        <ul>
+                                            <li><i class="fas fa-car text-secondary"></i> Marcar como "En Camino".</li>
+                                            <li><i class="fas fa-edit text-warning"></i> Editar todos los detalles de la cita.</li>
+                                            <li><i class="fas fa-ticket-alt text-info"></i> Ver e imprimir el cupón de servicio.</li>
+                                            <li><i class="fas fa-trash-alt text-danger"></i> Eliminar la cita (con confirmación).</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Nueva Cita -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <strong><i class="fas fa-plus-circle fa-fw me-2"></i>Nueva Cita</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionAyuda">
+                            <div class="accordion-body">
+                                <p>El formulario para crear nuevas citas está dividido en pasos para facilitar el proceso.</p>
+                                <ul>
+                                    <li><strong>Autocompletado de Cliente:</strong> Al escribir un número de teléfono en el <strong>Paso 1</strong> y presionar la tecla <code>Tab</code>, el sistema buscará si el cliente ya existe. Si lo encuentra, rellenará su nombre y te mostrará sus vehículos registrados en el <strong>Paso 2</strong>.</li>
+                                    <li><strong>Selección de Vehículo:</strong> Si un cliente ya tiene vehículos registrados, puedes seleccionarlo de la lista desplegable para autocompletar los datos del vehículo. Si no, puedes introducir los datos de un vehículo nuevo.</li>
+                                    <li><strong>Servicios y Agentes:</strong> Puedes gestionar la lista de servicios y agentes disponibles haciendo clic en el icono de engranaje <i class="fas fa-cog"></i> al lado de cada campo.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 4: Seguimiento y Post-Venta -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <strong><i class="fas fa-headset fa-fw me-2"></i>Seguimiento y Post-Venta</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionAyuda">
+                            <div class="accordion-body">
+                                <p>Estas secciones te ayudan a no perder el contacto con tus clientes.</p>
+                                <ul>
+                                    <li><strong>Seguimiento:</strong> Aquí aparecen automáticamente las citas que fueron <strong>canceladas</strong> o marcadas como <strong>"No Asistió"</strong>. El objetivo es contactar al cliente para intentar reagendar.</li>
+                                    <li><strong>Post-Venta:</strong> Aquí aparecen las citas <strong>completadas</strong> después de 3 días. El objetivo es contactar al cliente para medir su nivel de satisfacción.</li>
+                                    <li><strong>Filtros:</strong> Ambas secciones tienen filtros por estado ("Por Contactar" y "Contactados") y por rango de fechas para que tengas control total de la información.</li>
+                                    <li><strong>Acciones:</strong> Puedes registrar el resultado de cada contacto, añadir notas y contactar al cliente directamente por WhatsApp.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: Configuración -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <strong><i class="fas fa-cog fa-fw me-2"></i>Configuración</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionAyuda">
+                            <div class="accordion-body">
+                                <p>Desde el modal de configuración (icono <i class="fas fa-cog"></i> en la esquina superior derecha), puedes personalizar todo el sistema.</p>
+                                <ul>
+                                    <li><strong>Empresa:</strong> Cambia el nombre, dirección y datos de contacto que aparecen en los cupones.</li>
+                                    <li><strong>Apariencia:</strong> Personaliza los colores de la aplicación, sube tu logo y cambia el texto de bienvenida del encabezado.</li>
+                                    <li><strong>Agentes, Mecánicos y Servicios:</strong> Administra las listas de personal y los servicios que ofreces.</li>
+                                    <li><strong>Plantillas:</strong> Edita los mensajes predefinidos que se usan para contactar a los clientes por WhatsApp.</li>
+                                    <li><strong>Datos:</strong> Realiza respaldos completos del sistema o exporta tus citas a Excel. <strong>¡Es muy importante hacer respaldos regularmente!</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Fin de tab-content -->
+    </main>
+</div>
+    <!-- Modal para importar desde Excel -->
+    <div class="modal fade" id="importarExcelModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Importar desde Excel/CSV</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="archivoExcel" class="form-label">Seleccionar archivo Excel/CSV</label>
+                        <input class="form-control" type="file" id="archivoExcel" accept=".xlsx,.xls,.csv">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Opciones de importación</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="corregirFechas" checked>
+                            <label class="form-check-label" for="corregirFechas">
+                                Corregir formato de fechas automáticamente
+                            </label>
+                        </div>
+                        <small class="form-text text-muted">Esta opción intentará detectar y corregir formatos de fecha incorrectos durante la importación.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Formato de Números (para Montos)</label>
+                        <select class="form-select form-select-sm" id="formatoNumerosImportacion">
+                            <option value="auto" selected>Detección Automática</option>
+                            <option value="us">1,234.56 (Punto decimal)</option>
+                            <option value="eu">1.234,56 (Coma decimal)</option>
+                        </select>
+                        <small class="form-text text-muted">Selecciona cómo están escritos los números en tu archivo para asegurar que los montos se importen correctamente.</small>
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="btnAjustarMapeo" style="display: none;">
+                            <i class="fas fa-cogs me-1"></i> Ajustar Mapeo de Columnas
+                        </button>
+                    </div>
+                    <div id="mapeoColumnasContainer" class="mb-3" style="display: none;">
+                        <div class="alert alert-warning">No se detectaron todas las columnas necesarias. Por favor, asigna las columnas de tu archivo a los campos requeridos.</div>
+                        <h6>Asignación Manual de Columnas</h6>
+                        <div class="row" id="mapeoColumnasForm">
+                            <!-- Los selects para el mapeo se generarán aquí con JavaScript -->
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="form-label">Vista previa de datos</h6>
+                        <div class="import-preview table-responsive">
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Teléfono</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Año</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Servicio</th>
+                                        <th>Estado</th>
+                                        <th>Monto</th>
+                                        <th>Importación</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vistaPreviaDatos">
+                                    <tr>
+                                        <td colspan="11" class="text-center">No hay datos para mostrar</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="sobrescribirDatos">
+                        <label class="form-check-label" for="sobrescribirDatos">
+                            Sobrescribir datos existentes
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnAccionImportar" disabled>Importar Datos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para el cupón -->
+    <div class="modal fade" id="cuponModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cupón de Servicio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0" id="cuponContent" style="background-color: #e9ecef;">
+                    <!-- Contenido del cupón se generará aquí -->
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <div>
+                        <button type="button" class="btn btn-info" id="btnCompartirCupon" title="Compartir cupón"><i class="fas fa-share-alt me-1"></i>Compartir</button>
+                        <button type="button" class="btn btn-success" id="btnDescargarCupon" title="Descargar como imagen"><i class="fas fa-download me-1"></i>Descargar</button>
+                        <button type="button" class="btn btn-primary" onclick="imprimirCupon()">
+                            <i class="fas fa-print me-1"></i>Imprimir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar cita -->
+    <div class="modal fade" id="editarCitaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Cita</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarCitaForm">
+                        <input type="hidden" id="editarId">
+                        <div class="row">
+                            <!-- Columna Izquierda: Datos Principales -->
+                            <div class="col-md-6">
+                                <div class="content-subtitle">
+                                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Datos Principales</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3"><label for="editarNombreCliente" class="form-label">Nombre*</label><input type="text" class="form-control" id="editarNombreCliente" required></div>
+                                    <div class="col-md-6 mb-3"><label for="editarTelefono" class="form-label">Teléfono*</label><input type="tel" class="form-control" id="editarTelefono" required></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3"><label for="editarMarca" class="form-label">Marca*</label><input type="text" class="form-control" id="editarMarca" required></div>
+                                    <div class="col-md-4 mb-3"><label for="editarModelo" class="form-label">Modelo*</label><input type="text" class="form-control" id="editarModelo" required></div>
+                                    <div class="col-md-4 mb-3"><label for="editarAnio" class="form-label">Año*</label><input type="number" class="form-control" id="editarAnio" min="1900" max="2099" required></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="editarRegion" class="form-label">Región</label>
+                                        <select class="form-select" id="editarRegion">
+                                            <option value="">Seleccione...</option>
+                                            <option value="Americano">Americano</option>
+                                            <option value="Europeo">Europeo</option>
+                                            <option value="Japonés">Japonés</option>
+                                            <option value="Coreano">Coreano</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="editarCombustible" class="form-label">Combustible</label>
+                                        <select class="form-select" id="editarCombustible">
+                                            <option value="">Seleccione...</option>
+                                            <option value="Gasolina">Gasolina</option>
+                                            <option value="Diesel">Diesel</option>
+                                            <option value="Eléctrico">Eléctrico</option>
+                                            <option value="Híbrido">Híbrido</option>
+                                            <option value="Gas (GLP/GNV)">Gas (GLP/GNV)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="editarTrim" class="form-label">Trim/Versión</label>
+                                        <input type="text" class="form-control" id="editarTrim" placeholder="Ej: EX, Sport, Limited">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3"><label for="editarFecha" class="form-label">Fecha*</label><input type="date" class="form-control" id="editarFecha" required></div>
+                                    <div class="col-md-6 mb-3"><label for="editarHora" class="form-label">Hora*</label><select class="form-select" id="editarHora" required><option value="08:00">8:00 AM</option><option value="09:00">9:00 AM</option><option value="10:00">10:00 AM</option><option value="11:00">11:00 AM</option><option value="12:00">12:00 PM</option><option value="13:00">1:00 PM</option><option value="14:00">2:00 PM</option><option value="15:00">3:00 PM</option><option value="16:00">4:00 PM</option></select></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editarServicio" class="form-label">Servicio*</label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="editarServicio" required>
+                                            <option value="">Seleccione...</option>
+                                            <!-- Servicios predefinidos se cargarán aquí -->
+                                        </select>
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#gestionServiciosModal" title="Gestionar Servicios"><i class="fas fa-cog"></i></button>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="editarOtroServicioContainer" style="display: none;"><label for="editarOtroServicio" class="form-label">Especificar Servicio</label><input type="text" class="form-control" id="editarOtroServicio"></div>
+                                <div class="mb-3">
+                                    <label for="editarAgente" class="form-label">Agente</label>
+                                    <select class="form-select" id="editarAgente"><option value="">Seleccione un agente...</option></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editarFuente" class="form-label">Fuente de la Cita</label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="editarFuente">
+                                            <option value="">Seleccione una fuente...</option>
+                                            <!-- Fuentes se cargarán aquí -->
+                                        </select>
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#gestionFuentesModal" title="Gestionar Fuentes"><i class="fas fa-cog"></i></button>
+                                    </div>
+                                    <div id="editarOtroFuenteContainer" class="mt-2" style="display: none;">
+                                        <input type="text" class="form-control" id="editarOtroFuente" placeholder="Especifique la nueva fuente...">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editarNotas" class="form-label">Notas Adicionales</label><textarea class="form-control" id="editarNotas" rows="4"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha: Finanzas y Estado -->
+                            <div class="col-md-6">
+                                <div class="content-subtitle">
+                                    <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Estado y Finanzas</h5>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editarEstado" class="form-label">Estado de la Cita</label>
+                                    <select class="form-select" id="editarEstado">
+                                        <option value="pendiente">Pendiente</option><option value="recibido">Recibido</option><option value="completada">Completada</option>
+                                        <option value="reagendada">Reagendada</option><option value="no_asistio">No Asistió</option><option value="cancelada">Cancelada</option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <div class="mb-3 form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="editarFacturado">
+                                    <label class="form-check-label" for="editarFacturado">¿Servicio Facturado?</label>
+                                </div>
+                                <div class="mb-3" id="editarMontoContainer">
+                                    <label for="editarMonto" class="form-label">Monto Facturado</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text currency-symbol" id="simboloMonedaInput">$</span>
+                                        <input type="text" class="form-control" id="editarMonto" placeholder="0.00">
+                                    </div>
+                                </div>
+                                <div id="editarMecanicosContainer" class="mb-3" style="display: none;">
+                                    <label class="form-label fw-bold"><i class="fas fa-user-cog me-1"></i>Mecánicos Asignados</label>
+                                    <div id="editarMecanicosLista" class="list-group" style="max-height: 150px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: .375rem; padding: .5rem;">
+                                        <!-- Checkboxes de mecánicos se cargarán aquí -->
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="mb-3">
+                                    <label for="editarTieneCotizacion" class="form-label">¿Tiene Cotización?</label>
+                                    <select class="form-select" id="editarTieneCotizacion">
+                                        <option value="no_aplica">No aplica</option><option value="si">Sí</option><option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" id="editarMotivoCotizacionContainer" style="display: none;">
+                                    <label for="editarMotivoCotizacion" class="form-label">Motivo de no tener cotización</label>
+                                    <textarea class="form-control" id="editarMotivoCotizacion" rows="2"></textarea>
+                                </div>
+                                <hr>
+                                <div class="mb-3 form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="editarEsPromocion">
+                                    <label class="form-check-label" for="editarEsPromocion">Activar Promoción</label>
+                                </div>
+                                <div id="editarPromoContainer" class="row" style="display: none;">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="editarPrecioRegular" class="form-label">Precio Regular</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text currency-symbol">$</span>
+                                            <input type="number" class="form-control" id="editarPrecioRegular" placeholder="Ej: 1500">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="editarPrecioPromocional" class="form-label">Precio Promocional</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text currency-symbol">$</span>
+                                            <input type="number" class="form-control" id="editarPrecioPromocional" placeholder="Ej: 995">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" id="btnGuardarEdicion">
+                        <i class="fas fa-save me-1"></i>Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para eliminar -->
+    <div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que quieres eliminar esta cita?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Configuración -->
+    <div class="modal fade" id="configuracionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-cog me-2"></i>Configuración del Sistema</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Navegación de pestañas de configuración -->
+                        <div class="col-md-3">
+                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <button class="nav-link active" id="v-pills-empresa-tab" data-bs-toggle="pill" data-bs-target="#v-pills-empresa" type="button" role="tab"><i class="fas fa-building me-2"></i>Empresa</button>
+                                <button class="nav-link" id="v-pills-apariencia-tab" data-bs-toggle="pill" data-bs-target="#v-pills-apariencia" type="button" role="tab"><i class="fas fa-palette me-2"></i>Apariencia</button>
+                                <button class="nav-link" id="v-pills-agentes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-agentes" type="button" role="tab"><i class="fas fa-users me-2"></i>Agentes</button>
+                                <button class="nav-link" id="v-pills-mecanicos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-mecanicos" type="button" role="tab"><i class="fas fa-user-cog me-2"></i>Mecánicos</button>
+                                <button class="nav-link" id="v-pills-plantillas-tab" data-bs-toggle="pill" data-bs-target="#v-pills-plantillas" type="button" role="tab"><i class="fab fa-whatsapp me-2"></i>Plantillas</button>
+                                <button class="nav-link" id="v-pills-servicios-tab" data-bs-toggle="pill" data-bs-target="#v-pills-servicios" type="button" role="tab"><i class="fas fa-concierge-bell me-2"></i>Servicios</button>
+                                <button class="nav-link" id="v-pills-fuentes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-fuentes" type="button" role="tab"><i class="fas fa-share-alt me-2"></i>Fuentes</button>
+                                <button class="nav-link" id="v-pills-datos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-datos" type="button" role="tab"><i class="fas fa-database me-2"></i>Datos</button>
+                            </div>
+                        </div>
+                        <!-- Contenido de las pestañas de configuración -->
+                        <div class="col-md-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <!-- Pestaña Empresa -->
+                                <div class="tab-pane fade show active" id="v-pills-empresa" role="tabpanel">
+                                    <div class="config-section">
+                                        <div class="content-subtitle">
+                                            <h5 class="mb-0"><i class="fas fa-building me-2"></i>Datos de la Empresa</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label for="configNombreEmpresa" class="form-label">Nombre</label><input type="text" class="form-control" id="configNombreEmpresa" value="CheckEngineRD Unlimited"></div>
+                                            <div class="col-md-6 mb-3"><label for="configSucursal" class="form-label">Sucursal</label><input type="text" class="form-control" id="configSucursal" value="Santo Domingo"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label for="configDireccion" class="form-label">Dirección</label><input type="text" class="form-control" id="configDireccion" value="Av. de los Próceres 25, Santo Domingo"></div>
+                                            <div class="col-md-6 mb-3"><label for="configTelefono" class="form-label">Teléfono</label><input type="text" class="form-control" id="configTelefono" value="(809) 555-1234"></div>
+                                        </div>
+                                    </div>
+                                    <div class="config-section">
+                                        <div class="content-subtitle">
+                                            <h5 class="mb-0"><i class="fas fa-money-bill-wave me-2"></i>Configuración Monetaria</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label for="configMoneda" class="form-label">Moneda</label><select class="form-select" id="configMoneda"><option value="RD">Peso Dominicano (RD$)</option><option value="USD">Dólar (USD$)</option><option value="EUR">Euro (€)</option></select></div>
+                                            <div class="col-md-6 mb-3"><label for="configFormatoMoneda" class="form-label">Formato</label><select class="form-select" id="configFormatoMoneda"><option value="es-DO">RD$ 1,000.00</option><option value="en-US">$1,000.00</option><option value="de-DE">1.000,00 €</option></select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="configMostrarMontosSinDecimales">
+                                                    <label class="form-check-label" for="configMostrarMontosSinDecimales">Mostrar montos sin decimales</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Apariencia -->
+                                <div class="tab-pane fade" id="v-pills-apariencia" role="tabpanel">
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fas fa-palette me-2"></i>Colores</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label for="configPrimaryColor" class="form-label">Primario</label><input type="color" class="form-control form-control-color" id="configPrimaryColor" value="#2c3e50"></div>
+                                            <div class="col-md-6 mb-3"><label for="configSecondaryColor" class="form-label">Secundario</label><input type="color" class="form-control form-control-color" id="configSecondaryColor" value="#3498db"></div>
+                                        </div>
+                                    </div>
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fas fa-image me-2"></i>Logo y QR</h5>
+                                        <div class="mb-3"><label for="configLogo" class="form-label">Seleccionar Logo</label><input class="form-control" type="file" id="configLogo" accept="image/*"></div>
+                                        <div class="mb-3"><h6 class="form-label">Vista Previa</h6><div><img id="logoPreview" src="https://placehold.co/180x50/ffffff/3498db?text=CheckEngineRD" class="logo-preview" alt="Vista previa del logo"></div></div>
+                                        <div class="mb-3"><label for="configQrUrl" class="form-label">URL para Código QR</label><input type="text" class="form-control" id="configQrUrl" placeholder="Ej: https://instagram.com/tu_taller"></div>
+                                    </div>
+                                    <div class="config-section">
+                                        <div class="content-subtitle">
+                                            <h5 class="mb-0"><i class="fas fa-font me-2"></i>Texto del Encabezado</h5>
+                                        </div>
+                                        <div class="mb-3"><label for="configWelcomeText" class="form-label">Mensaje de Bienvenida</label><input type="text" class="form-control" id="configWelcomeText"></div>
+                                        <div class="mb-3"><label for="configHeaderTextColor" class="form-label">Color del Texto del Encabezado</label><input type="color" class="form-control form-control-color" id="configHeaderTextColor"></div>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Agentes -->
+                                <div class="tab-pane fade" id="v-pills-agentes" role="tabpanel">
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fas fa-users-cog me-2"></i>Gestión de Agentes</h5>
+                                        <p class="text-muted">Administra los agentes de ventas que pueden ser asignados a las citas.</p>
+                                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#gestionAgentesModal"><i class="fas fa-users me-2"></i>Administrar Agentes</button>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Mecánicos -->
+                                <div class="tab-pane fade" id="v-pills-mecanicos" role="tabpanel">
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fas fa-user-cog me-2"></i>Gestión de Mecánicos</h5>
+                                        <p class="text-muted">Administra el personal técnico que puede ser asignado a los trabajos completados.</p>
+                                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#gestionMecanicosModal"><i class="fas fa-user-cog me-2"></i>Administrar Mecánicos</button>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Servicios -->
+                                <div class="tab-pane fade" id="v-pills-servicios" role="tabpanel">
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fas fa-concierge-bell me-2"></i>Gestión de Servicios</h5>
+                                        <p class="text-muted">Define los servicios que ofreces para estandarizar y agilizar la creación de citas.</p>
+                                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#gestionServiciosModal"><i class="fas fa-concierge-bell me-2"></i>Administrar Servicios</button>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Fuentes -->
+                                <div class="tab-pane fade" id="v-pills-fuentes" role="tabpanel">
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fas fa-share-alt me-2"></i>Gestión de Fuentes de Cita</h5>
+                                        <p class="text-muted">Define las fuentes desde donde provienen tus clientes (ej. WhatsApp, Instagram, Referido).</p>
+                                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#gestionFuentesModal"><i class="fas fa-share-alt me-2"></i>Administrar Fuentes</button>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Plantillas -->
+                                <div class="tab-pane fade" id="v-pills-plantillas" role="tabpanel">
+                                    <div class="config-section">
+                                        <h5 class="mb-3"><i class="fab fa-whatsapp me-2"></i>Plantillas de Mensajes</h5>
+                                        <div class="mb-3">
+                                            <label for="configWhatsappTemplate" class="form-label">Plantilla para recordatorios</label>
+                                            <textarea class="form-control" id="configWhatsappTemplate" rows="4"></textarea>
+                                            <small class="form-text text-muted">Usa: <code>{cliente}</code>, <code>{marca}</code>, <code>{modelo}</code>, <code>{fecha}</code>, <code>{hora}</code>, <code>{nombreEmpresa}</code>.</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="configWhatsappReagendarTemplate" class="form-label">Plantilla para seguimiento</label>
+                                            <textarea class="form-control" id="configWhatsappReagendarTemplate" rows="4" placeholder="Hola {cliente}, notamos que no pudiste asistir a tu cita del {fecha}. ¿Te gustaría reagendar?"></textarea>
+                                            <small class="form-text text-muted">Usa los mismos placeholders.</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="configWhatsappPostVentaTemplate" class="form-label">Plantilla para post-venta</label>
+                                            <textarea class="form-control" id="configWhatsappPostVentaTemplate" rows="4" placeholder="Hola {cliente}, ¿qué tal tu experiencia con el servicio de {servicio} para tu {marca} {modelo}?"></textarea>
+                                            <small class="form-text text-muted">Usa: <code>{cliente}</code>, <code>{servicio}</code>, <code>{marca}</code>, <code>{modelo}</code>, <code>{nombreEmpresa}</code>.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Pestaña Datos -->
+                                <div class="tab-pane fade" id="v-pills-datos" role="tabpanel">
+                                    <div class="config-section">
+                                        <div class="content-subtitle">
+                                            <h5 class="mb-0"><i class="fas fa-database me-2"></i>Respaldos del Sistema</h5>
+                                        </div>
+                                        <p class="text-muted">Guarda o restaura un respaldo completo del sistema (citas, clientes, agentes, configuración).</p>
+                                        <div class="btn-group w-100" role="group">
+                                            <button id="btnGuardarManual" class="btn btn-primary"><i class="fas fa-download me-1"></i> Guardar Respaldo</button>
+                                            <label for="importarArchivo" class="btn btn-info mb-0"><i class="fas fa-upload me-1"></i> Importar Respaldo</label>
+                                            <input type="file" id="importarArchivo" class="d-none" accept=".json">
+                                        </div>
+                                    </div>
+                                    <div class="config-section">
+                                        <div class="content-subtitle">
+                                            <h5 class="mb-0"><i class="fas fa-file-excel me-2"></i>Importar/Exportar Citas</h5>
+                                        </div>
+                                        <p class="text-muted">Exporta la lista de citas actual (con filtros) a Excel o importa desde un archivo.</p>
+                                        <div class="btn-group w-100" role="group">
+                                            <button id="btnExportarExcel" class="btn btn-success"><i class="fas fa-file-excel me-1"></i> Exportar a Excel</button>
+                                            <button id="btnImportarExcel" class="btn btn-warning"><i class="fas fa-file-import me-1"></i> Importar desde Excel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarConfiguracion">Guardar Configuración</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Agentes -->
+    <div class="modal fade" id="gestionAgentesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-users me-2"></i>Gestión de Agentes</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0">Lista de Agentes</h5>
+                        </div>
+                        <p class="text-muted">Haz clic en un agente para editar sus detalles o completa el formulario para añadir uno nuevo.</p>
+                        <div class="table-responsive" style="max-height: 250px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th class="text-center">Citas Totales</th>
+                                        <th class="text-center">Completadas</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaAgentes"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <form id="agenteForm" class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0" id="agenteFormTitulo">Crear Nuevo Agente</h5>
+                        </div>
+                        <input type="hidden" id="agenteId">
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label for="agenteNombre" class="form-label">Nombre completo*</label><input type="text" class="form-control" id="agenteNombre" required></div>
+                            <div class="col-md-6 mb-3"><label for="agenteTelefono" class="form-label">Teléfono</label><input type="tel" class="form-control" id="agenteTelefono"></div>
+                        </div>
+                        <div class="row align-items-end">
+                            <div class="col-md-6 mb-3"><label for="agenteEmail" class="form-label">Correo electrónico</label><input type="email" class="form-control" id="agenteEmail"></div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check form-switch"><input type="checkbox" class="form-check-input" id="agenteActivo" checked><label class="form-check-label" for="agenteActivo">Agente activo</label></div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-danger" id="btnEliminarAgente" style="display: none;"><i class="fas fa-trash-alt me-1"></i> Eliminar</button>
+                            <button type="submit" class="btn btn-primary" id="btnGuardarAgente"><i class="fas fa-plus me-1"></i> Crear Agente</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Mecánicos -->
+    <div class="modal fade" id="gestionMecanicosModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-cog me-2"></i>Gestión de Mecánicos</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0">Lista de Mecánicos</h5>
+                        </div>
+                        <p class="text-muted">Administra el personal técnico que realiza los trabajos.</p>
+                        <div class="table-responsive" style="max-height: 250px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Especialidad</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaMecanicos"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <form id="mecanicoForm" class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0" id="mecanicoFormTitulo">Crear Nuevo Mecánico</h5>
+                        </div>
+                        <input type="hidden" id="mecanicoId">
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label for="mecanicoNombre" class="form-label">Nombre completo*</label><input type="text" class="form-control" id="mecanicoNombre" required></div>
+                            <div class="col-md-6 mb-3"><label for="mecanicoEspecialidad" class="form-label">Especialidad</label><input type="text" class="form-control" id="mecanicoEspecialidad" placeholder="Ej: Frenos, Transmisión"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="form-check form-switch mt-3"><input type="checkbox" class="form-check-input" id="mecanicoActivo" checked><label class="form-check-label" for="mecanicoActivo">Mecánico activo</label></div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-danger" id="btnEliminarMecanico" style="display: none;"><i class="fas fa-trash-alt me-1"></i> Eliminar</button>
+                            <button type="submit" class="btn btn-secondary" id="btnGuardarMecanico"><i class="fas fa-plus me-1"></i> Crear Mecánico</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Asignar Mecánicos a un Trabajo -->
+    <div class="modal fade" id="asignarMecanicoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Asignar Mecánicos</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="asignarMecanicoCitaId">
+                    <input type="hidden" id="asignarMecanicoTipo">
+                    <p><strong>Trabajo para:</strong> <span id="asignarMecanicoInfoCliente"></span></p>
+                    <p class="text-muted">Selecciona los mecánicos que participaron en este servicio.</p>
+                    <div id="asignarMecanicoLista" class="list-group">
+                        <!-- Checkboxes de mecánicos se cargarán aquí -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-info" id="btnGuardarMecanicosAsignados">Guardar Asignación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Clientes -->
+    <div class="modal fade" id="clienteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Gestión de Cliente</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="clienteForm">
+                        <input type="hidden" id="clienteId">
+                        <div class="mb-3">
+                            <label for="clienteNombre" class="form-label">Nombre completo*</label>
+                            <input type="text" class="form-control" id="clienteNombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clienteTelefono" class="form-label">Teléfono*</label>
+                            <input type="tel" class="form-control" id="clienteTelefono" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clienteEmail" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="clienteEmail">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="btnGuardarCliente">Guardar Cliente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Vehículos -->
+    <div class="modal fade" id="vehiculoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vehiculoModalTitulo"><i class="fas fa-car me-2"></i>Añadir Vehículo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="vehiculoForm">
+                        <input type="hidden" id="vehiculoClienteId">
+                        <input type="hidden" id="vehiculoId">
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label for="vehiculoMarca" class="form-label">Marca*</label><input type="text" class="form-control" id="vehiculoMarca" required></div>
+                            <div class="col-md-6 mb-3"><label for="vehiculoModelo" class="form-label">Modelo*</label><input type="text" class="form-control" id="vehiculoModelo" required></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label for="vehiculoAnio" class="form-label">Año*</label><input type="number" class="form-control" id="vehiculoAnio" min="1900" max="2099" required></div>
+                            <div class="col-md-6 mb-3"><label for="vehiculoTrim" class="form-label">Trim/Versión</label><input type="text" class="form-control" id="vehiculoTrim"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="vehiculoRegion" class="form-label">Región</label>
+                                <select class="form-select" id="vehiculoRegion"><option value="">Seleccione...</option><option value="Americano">Americano</option><option value="Europeo">Europeo</option><option value="Japonés">Japonés</option><option value="Coreano">Coreano</option><option value="Otro">Otro</option></select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="vehiculoCombustible" class="form-label">Combustible</label>
+                                <select class="form-select" id="vehiculoCombustible"><option value="">Seleccione...</option><option value="Gasolina">Gasolina</option><option value="Diesel">Diesel</option><option value="Eléctrico">Eléctrico</option><option value="Híbrido">Híbrido</option><option value="Gas (GLP/GNV)">Gas (GLP/GNV)</option></select>
+                            </div>
+                        </div>
+                         <div class="mb-3"><label for="vehiculoPlaca" class="form-label">Placa / Matrícula</label><input type="text" class="form-control" id="vehiculoPlaca"></div>
+                        <div class="mb-3"><label for="vehiculoVin" class="form-label">VIN / Chasis</label><input type="text" class="form-control" id="vehiculoVin"></div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-info" id="btnGuardarVehiculo">Guardar Vehículo</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Servicios -->
+    <div class="modal fade" id="gestionServiciosModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-concierge-bell me-2"></i>Gestión de Servicios</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0">Lista de Servicios</h5>
+                        </div>
+                        <p class="text-muted">Haz clic en un servicio para editarlo o completa el formulario para añadir uno nuevo.</p>
+                        <div class="table-responsive" style="max-height: 250px;">
+                            <table class="table table-hover">
+                                <thead><tr><th>Nombre del Servicio</th><th>Precio por Defecto</th><th>Acciones</th></tr></thead>
+                                <tbody id="tablaServicios"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <form id="servicioForm" class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0" id="servicioFormTitulo">Crear Nuevo Servicio</h5>
+                        </div>
+                        <input type="hidden" id="servicioId">
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label for="servicioNombre" class="form-label">Nombre del Servicio*</label>
+                                <input type="text" class="form-control" id="servicioNombre" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="servicioPrecio" class="form-label">Precio por Defecto (Opcional)</label>
+                                <div class="input-group"><span class="input-group-text currency-symbol">$</span><input type="number" class="form-control" id="servicioPrecio" placeholder="0.00"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center mt-3"><button type="submit" class="btn btn-primary" id="btnGuardarServicio"><i class="fas fa-plus me-1"></i> Crear Servicio</button></div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Fuentes de Cita -->
+    <div class="modal fade" id="gestionFuentesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-share-alt me-2"></i>Gestión de Fuentes de Cita</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0">Lista de Fuentes</h5>
+                        </div>
+                        <p class="text-muted">Haz clic en una fuente para editarla o completa el formulario para añadir una nueva.</p>
+                        <div class="table-responsive" style="max-height: 250px;">
+                            <table class="table table-hover">
+                                <thead><tr><th>Nombre de la Fuente</th><th>Acciones</th></tr></thead>
+                                <tbody id="tablaFuentes"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <form id="fuenteForm" class="config-section">
+                        <div class="content-subtitle">
+                            <h5 class="mb-0" id="fuenteFormTitulo">Crear Nueva Fuente</h5>
+                        </div>
+                        <input type="hidden" id="fuenteId">
+                        <div class="mb-3"><label for="fuenteNombre" class="form-label">Nombre de la Fuente*</label><input type="text" class="form-control" id="fuenteNombre" required></div>
+                        <div class="d-flex justify-content-end align-items-center mt-3"><button type="submit" class="btn btn-primary" id="btnGuardarFuente"><i class="fas fa-plus me-1"></i> Crear Fuente</button></div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Enviar Mensaje de WhatsApp -->
+    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fab fa-whatsapp me-2"></i>Enviar Mensaje a Cliente</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="whatsappClienteId">
+                    <p><strong>Cliente:</strong> <span id="whatsappNombreCliente"></span></p>
+                    <div class="mb-3">
+                        <label for="whatsappTemplateSelect" class="form-label">Seleccionar Plantilla</label>
+                        <select class="form-select" id="whatsappTemplateSelect"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="whatsappMessageText" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="whatsappMessageText" rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-info" id="btnCopiarMensajeWhatsapp"><i class="fas fa-copy me-1"></i>Copiar Mensaje</button>
+                    <button type="button" class="btn btn-success" id="btnAbrirEnWhatsapp"><i class="fab fa-whatsapp me-1"></i>Abrir en WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Notas de Seguimiento -->
+    <div class="modal fade" id="seguimientoNotasModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-sticky-note me-2"></i>Notas de Seguimiento</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="seguimientoCitaId">
+                    <p><strong>Cliente:</strong> <span id="seguimientoNombreCliente"></span></p>
+                    <div class="mb-3">
+                        <label for="seguimientoResultadoSelect" class="form-label">Resultado del Contacto</label>
+                        <select class="form-select" id="seguimientoResultadoSelect">
+                            <option value="contacted">Contactado (Seguimiento pendiente)</option>
+                            <option value="rebooked">Cita Reagendada</option>
+                            <option value="closed_not_interested">Cerrar (No interesado)</option>
+                            <option value="closed_other">Cerrar (Otro motivo)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="seguimientoNotasText" class="form-label">Notas (obligatorio si se cierra):</label>
+                        <textarea class="form-control" id="seguimientoNotasText" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-info" id="btnGuardarNotasSeguimiento">Registrar Interacción</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Notas de Post-Venta -->
+    <div class="modal fade" id="postVentaNotasModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-star me-2"></i>Notas de Post-Venta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="postVentaCitaId">
+                    <p><strong>Cliente:</strong> <span id="postVentaNombreCliente"></span></p>
+                    <div class="mb-3">
+                        <label class="form-label">Nivel de Satisfacción</label>
+                        <div id="postVentaSatisfaccionContainer" class="d-flex justify-content-around">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="satisfaccion" id="satisfaccion_satisfecho" value="satisfecho">
+                                <label class="form-check-label" for="satisfaccion_satisfecho"><i class="fas fa-smile-beam text-success fa-2x"></i></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="satisfaccion" id="satisfaccion_neutral" value="neutral">
+                                <label class="form-check-label" for="satisfaccion_neutral"><i class="fas fa-meh text-warning fa-2x"></i></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="satisfaccion" id="satisfaccion_insatisfecho" value="insatisfecho">
+                                <label class="form-check-label" for="satisfaccion_insatisfecho"><i class="fas fa-frown text-danger fa-2x"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postVentaNotasText" class="form-label">Feedback del Cliente:</label>
+                        <textarea class="form-control" id="postVentaNotasText" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarNotasPostVenta">Registrar Feedback</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Gestión de Productos -->
+    <div class="modal fade" id="productoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productoModalTitulo"><i class="fas fa-box-open me-2"></i>Nuevo Producto</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productoForm">
+                        <input type="hidden" id="productoId">
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label for="productoNombre" class="form-label">Nombre del Producto*</label>
+                                <input type="text" class="form-control" id="productoNombre" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="productoSku" class="form-label">SKU / Código</label>
+                                <input type="text" class="form-control" id="productoSku">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productoDescripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="productoDescripcion" rows="2"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="productoPrecioCosto" class="form-label">Precio de Costo</label>
+                                <div class="input-group"><span class="input-group-text currency-symbol">$</span><input type="number" step="0.01" class="form-control" id="productoPrecioCosto"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="productoPrecioVenta" class="form-label">Precio de Venta</label>
+                                <div class="input-group"><span class="input-group-text currency-symbol">$</span><input type="number" step="0.01" class="form-control" id="productoPrecioVenta"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="productoStock" class="form-label">Stock Inicial</label>
+                                <input type="number" class="form-control" id="productoStock" placeholder="Dejar en 0 si no hay stock inicial">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="productoStockMinimo" class="form-label">Stock Mínimo de Alerta</label>
+                                <input type="number" class="form-control" id="productoStockMinimo" value="0">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger me-auto" id="btnEliminarProducto" style="display: none;">Eliminar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarProducto">Guardar Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Movimiento de Stock (Entrada/Salida) -->
+    <div class="modal fade" id="movimientoStockModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movimientoModalTitulo"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="movimientoForm">
+                        <input type="hidden" id="movimientoProductoId">
+                        <input type="hidden" id="movimientoTipo">
+                        <p><strong>Producto:</strong> <span id="movimientoNombreProducto"></span></p>
+                        <div class="mb-3">
+                            <label for="movimientoCantidad" class="form-label">Cantidad*</label>
+                            <input type="number" class="form-control" id="movimientoCantidad" required min="1">
+                        </div>
+                        <div class="mb-3" id="movimientoCitaContainer" style="display: none;">
+                            <label for="movimientoCitaSelect" class="form-label">Asignar a Cita (Opcional)</label>
+                            <select class="form-select" id="movimientoCitaSelect"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="movimientoNotas" class="form-label">Notas / Proveedor / Destino</label>
+                            <input type="text" class="form-control" id="movimientoNotas">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button type="button" class="btn btn-primary" id="btnGuardarMovimiento">Registrar Movimiento</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap y JavaScript personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Librerías adicionales -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FullCalendar JS y locale español -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona de Relax - Gescita</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Game Styles -->
+    <link rel="stylesheet" href="css/games.css">
+    <!-- Main App Styles (for consistency) -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --primary-color-rgb: 44, 62, 80;
+            --text-heading: #343a40;
+            --text-body: #6c757d;
+            --app-bg: #e9ecef;
+            --card-bg: #ffffff;
+            --nav-border: #dee2e6;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+            --transition: 0.2s ease-in-out;
+        }
+        body {
+            background-color: var(--app-bg);
+            font-family: 'Poppins', sans-serif;
+        }
+        .app-body { display: flex; height: 100vh; }
+        .app-sidebar {
+            width: 260px;
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--nav-border);
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header { padding: 0.75rem 1.5rem; margin-bottom: 1rem; }
+        .sidebar-header .logo { height: 40px; width: auto; }
+        .sidebar-nav { padding: 0 1rem; }
+        .sidebar-nav .nav-item { width: 100%; margin-bottom: 0.25rem; }
+        .sidebar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            white-space: nowrap;
+            font-weight: 500;
+            color: var(--text-body);
+            border-radius: var(--radius-md);
+            transition: all var(--transition);
+        }
+        .sidebar-nav .nav-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+        }
+        .sidebar-nav .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        .sidebar-nav .nav-link .fa-fw { font-size: 1.1rem; }
+        .main-content-wrapper {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-body">
+        <nav class="app-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html">
+                    <img src="https://placehold.co/180x40/2c3e50/ffffff?text=CheckEngineRD" alt="Logo" class="logo">
+                </a>
+            </div>
+            <ul class="nav flex-column sidebar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-tachometer-alt fa-fw"></i> <span class="text">Volver al Sistema</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="fas fa-gamepad fa-fw"></i><span class="text">Zona de Relax</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content-wrapper">
+            <div class="game-zone-header">
+                <h1><i class="fas fa-ghost me-2"></i>Zona de Relax</h1>
+                <p class="lead">Un pequeño descanso para despejar la mente. ¡Elige tu juego!</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Tic-Tac-Toe Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="game-card">
+                        <div class="game-card-icon"><i class="fas fa-times"></i><i class="far fa-circle"></i></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Tres en Raya</h5>
+                            <p class="card-text text-muted">El clásico juego de estrategia. ¿Podrás alinear tres antes que la máquina?</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ticTacToeModal">Jugar Ahora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snake Game Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="game-card">
+                        <div class="game-card-icon"><i class="fas fa-staff-snake"></i></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Culebrita</h5>
+                            <p class="card-text text-muted">Guía a la serpiente para comer la fruta y crecer, ¡pero no choques!</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#snakeModal">Jugar Ahora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory Game Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="game-card">
+                        <div class="game-card-icon"><i class="fas fa-brain"></i></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Juego de Memoria</h5>
+                            <p class="card-text text-muted">Encuentra todos los pares de cartas iguales en el menor tiempo posible.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memoryGameModal">Jugar Ahora</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Tic-Tac-Toe Modal -->
+    <div class="modal fade" id="ticTacToeModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tres en Raya</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="tic-tac-toe-board"></div>
+                    <p id="tic-tac-toe-status" class="mt-3"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="tic-tac-toe-reset">Reiniciar Juego</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snake Game Modal -->
+    <div class="modal fade" id="snakeModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Culebrita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <canvas id="snake-canvas" width="400" height="400"></canvas>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div id="snake-score">Puntuación: 0</div>
+                        <button type="button" class="btn btn-secondary" id="snake-reset">Reiniciar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Game Modal -->
+    <div class="modal fade" id="memoryGameModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Juego de Memoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="memory-game-board" class="mx-auto"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="memory-game-reset">Reiniciar Juego</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // --- Tic-Tac-Toe Logic ---
+        const tttBoard = document.getElementById('tic-tac-toe-board');
+        const tttStatus = document.getElementById('tic-tac-toe-status');
+        const tttResetBtn = document.getElementById('tic-tac-toe-reset');
+        let tttState = ['', '', '', '', '', '', '', '', ''];
+        let tttCurrentPlayer = 'x';
+        let tttGameActive = true;
+
+        const tttWinningConditions = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
+            [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
+        ];
+
+        function tttHandleResultValidation() {
+            let roundWon = false;
+            for (let i = 0; i < tttWinningConditions.length; i++) {
+                const winCondition = tttWinningConditions[i];
+                let a = tttState[winCondition[0]];
+                let b = tttState[winCondition[1]];
+                let c = tttState[winCondition[2]];
+                if (a === '' || b === '' || c === '') continue;
+                if (a === b && b === c) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                tttStatus.textContent = `¡Jugador '${tttCurrentPlayer.toUpperCase()}' ha ganado!`;
+                tttGameActive = false;
+                return;
+            }
+
+            if (!tttState.includes('')) {
+                tttStatus.textContent = '¡Es un empate!';
+                tttGameActive = false;
+                return;
+            }
+
+            tttCurrentPlayer = tttCurrentPlayer === 'x' ? 'o' : 'x';
+            tttStatus.textContent = `Turno del jugador '${tttCurrentPlayer.toUpperCase()}'`;
+        }
+
+        function tttHandleCellClick(e) {
+            const clickedCell = e.target;
+            const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+
+            if (tttState[clickedCellIndex] !== '' || !tttGameActive) return;
+
+            tttState[clickedCellIndex] = tttCurrentPlayer;
+            clickedCell.textContent = tttCurrentPlayer.toUpperCase();
+            clickedCell.classList.add(tttCurrentPlayer);
+            tttHandleResultValidation();
+        }
+
+        function tttResetGame() {
+            tttState = ['', '', '', '', '', '', '', '', ''];
+            tttGameActive = true;
+            tttCurrentPlayer = 'x';
+            tttStatus.textContent = `Turno del jugador 'X'`;
+            document.querySelectorAll('.tic-tac-toe-cell').forEach(cell => {
+                cell.textContent = '';
+                cell.classList.remove('x', 'o');
+            });
+        }
+
+        function tttCreateBoard() {
+            tttBoard.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('tic-tac-toe-cell');
+                cell.setAttribute('data-cell-index', i);
+                cell.addEventListener('click', tttHandleCellClick);
+                tttBoard.appendChild(cell);
+            }
+            tttResetGame();
+        }
+
+        tttResetBtn.addEventListener('click', tttResetGame);
+        document.getElementById('ticTacToeModal').addEventListener('shown.bs.modal', tttCreateBoard);
+
+        // --- Snake Game Logic ---
+        const snakeCanvas = document.getElementById('snake-canvas');
+        const snakeCtx = snakeCanvas.getContext('2d');
+        const snakeResetBtn = document.getElementById('snake-reset');
+        const snakeScoreEl = document.getElementById('snake-score');
+        const gridSize = 20;
+        let snake, food, score, direction, gameLoop;
+
+        function snakeInitialize() {
+            snake = [{ x: 10, y: 10 }];
+            food = {};
+            score = 0;
+            direction = 'right';
+            snakePlaceFood();
+            snakeScoreEl.textContent = `Puntuación: 0`;
+            if (gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(snakeGameLoop, 150);
+        }
+
+        function snakePlaceFood() {
+            food.x = Math.floor(Math.random() * (snakeCanvas.width / gridSize));
+            food.y = Math.floor(Math.random() * (snakeCanvas.height / gridSize));
+        }
+
+        function snakeGameLoop() {
+            snakeCtx.fillStyle = '#1a2533';
+            snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+            let head = { x: snake[0].x, y: snake[0].y };
+            if (direction === 'right') head.x++;
+            if (direction === 'left') head.x--;
+            if (direction === 'up') head.y--;
+            if (direction === 'down') head.y++;
+
+            if (head.x < 0 || head.x * gridSize >= snakeCanvas.width || head.y < 0 || head.y * gridSize >= snakeCanvas.height || snakeCheckCollision(head)) {
+                clearInterval(gameLoop);
+                snakeScoreEl.textContent = `¡Fin! Puntuación: ${score}`;
+                return;
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                snakeScoreEl.textContent = `Puntuación: ${score}`;
+                snakePlaceFood();
+            } else {
+                snake.pop();
+            }
+
+            snakeCtx.fillStyle = '#e74c3c';
+            snakeCtx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+
+            snakeCtx.fillStyle = '#2ecc71';
+            snake.forEach(segment => snakeCtx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize));
+        }
+
+        function snakeCheckCollision(head) {
+            return snake.some(segment => segment.x === head.x && segment.y === head.y);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowUp' && direction !== 'down') direction = 'up';
+            if (e.key === 'ArrowDown' && direction !== 'up') direction = 'down';
+            if (e.key === 'ArrowLeft' && direction !== 'right') direction = 'left';
+            if (e.key === 'ArrowRight' && direction !== 'left') direction = 'right';
+        });
+
+        snakeResetBtn.addEventListener('click', snakeInitialize);
+        document.getElementById('snakeModal').addEventListener('shown.bs.modal', snakeInitialize);
+        document.getElementById('snakeModal').addEventListener('hidden.bs.modal', () => clearInterval(gameLoop));
+
+        // --- Memory Game Logic ---
+        const memoryBoard = document.getElementById('memory-game-board');
+        const memoryResetBtn = document.getElementById('memory-game-reset');
+        const icons = ['fa-anchor', 'fa-car', 'fa-bicycle', 'fa-bomb', 'fa-plane', 'fa-rocket', 'fa-ship', 'fa-bus'];
+        let cards = [...icons, ...icons];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+        }
+
+        function memoryCreateBoard() {
+            shuffle(cards);
+            memoryBoard.innerHTML = '';
+            matchedPairs = 0;
+            cards.forEach(icon => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.dataset.icon = icon;
+                card.innerHTML = `
+                    <div class="card-face card-front"><i class="fas fa-question"></i></div>
+                    <div class="card-face card-back"><i class="fas ${icon}"></i></div>
+                `;
+                card.addEventListener('click', flipCard);
+                memoryBoard.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (flippedCards.length === 2 || this.classList.contains('flipped')) return;
+            this.classList.add('flipped');
+            flippedCards.push(this);
+            if (flippedCards.length === 2) {
+                setTimeout(checkForMatch, 700);
+            }
+        }
+
+        function checkForMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.icon === card2.dataset.icon) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                if (matchedPairs === icons.length) {
+                    setTimeout(() => alert('¡Felicidades, has ganado!'), 300);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+            }
+            flippedCards = [];
+        }
+
+        memoryResetBtn.addEventListener('click', memoryCreateBoard);
+        document.getElementById('memoryGameModal').addEventListener('shown.bs.modal', memoryCreateBoard);
+    </script>
+</body>
+</html>
